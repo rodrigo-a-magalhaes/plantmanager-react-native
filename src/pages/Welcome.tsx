@@ -1,24 +1,16 @@
-import React, { useState } from 'react';
-import { Text, SafeAreaView, Image, StyleSheet, TouchableOpacity, Dimensions, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-
+import { useNavigation } from '@react-navigation/core';
+import React from 'react';
+import { Dimensions, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import wateringImg from '../assets/watering.png';
-// import { useNavigation } from '@react-navigation/core';
-
-import fonts from '../styles/fonts';
 import colors from '../styles/colors';
-import { Button } from '../components/Button';
+import fonts from '../styles/fonts';
 
 export function Welcome() {
-  const [visible, setVisible] = useState(false);
-  function handleVisible(){
-    setVisible(true)
-  }
-
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
   function handleStart() {
-    // navigation.navigate('UserIdentification');
+    navigation.navigate('UserIdentification');
   }
 
   return (
@@ -41,7 +33,16 @@ export function Welcome() {
           Nós cuidamos de lembrar você sempre que precisar.
         </Text>
 
-        <Button title="Avançar" onPress={handleVisible} />
+        <TouchableOpacity
+          style={styles.button}
+          activeOpacity={0.7}
+          onPress={handleStart}
+        >
+          <Feather
+            name="chevron-right"
+            style={styles.buttonIcon}
+          />
+        </TouchableOpacity>
 
       </View>
     </SafeAreaView>
@@ -78,4 +79,17 @@ const styles = StyleSheet.create({
   image: {
     height: Dimensions.get('window').width * 0.7
   },
+  button: {
+    backgroundColor: colors.green,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 16,
+    marginBottom: 10,
+    height: 56,
+    width: 56,
+  },
+  buttonIcon: {
+    fontSize: 32,
+    color: colors.white
+  }
 });
